@@ -1,8 +1,6 @@
 package com.example.gruasappmoviles;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,6 +17,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -32,22 +31,24 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
 
     private AppBarConfiguration mAppBarConfiguration;
     FirebaseAuth mFirebaseAuth;
-    TextView opStateTxtV;
-    //Button opStateBtn;
+
+    TextView opStateTxtV, opName;
     ImageView mImage;
+    String opEmail;
+    private FirebaseFirestore mFirestore;
+    String state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        opStateTxtV = findViewById(R.id.text_opState);
-        //opStateBtn = findViewById(R.id.btn_opState);
-        mImage = findViewById(R.id.imageState);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,66 +71,78 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-/*
-        opStateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopupMenu popup = new PopupMenu(getApplicationContext(), opStateBtn);
-                popup.getMenuInflater().inflate(R.menu.popup_menu,popup.getMenu());
-
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.available:
-                                opStateTxtV.setText("Disponible");
-                                return true;
-                            case R.id.eating:
-                                opStateTxtV.setText("Comiendo");
-                                return true;
-                            case R.id.inservice:
-                                opStateTxtV.setText("En servicio");
-                                return true;
-                        }
-                        return false;
-                    }
-                });
-                popup.show();
-            }
-        });*/
+        mFirestore = FirebaseFirestore.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
     }
 
-    public void showPopUp(View view) {
-        PopupMenu popup = new PopupMenu(this, view);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.popup_menu,popup.getMenu());
-        //popup.setOnMenuItemClickListener(this);
-        //popup.inflate(R.menu.popup_menu);
+    //Comportamiento Popup Menu
+    public void popupMenu(View v, int popupmenu) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(popupmenu);
         popup.show();
     }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.available:
-                //opStateTxtV.setText("Disponible");
-                mImage.setImageResource(R.drawable.checkmark);
-                Toast.makeText(Home.this, "Disponible!", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.eating:
-                //opStateTxtV.setText("Comiendo");
-                mImage.setImageResource(R.drawable.fast_food);
-                Toast.makeText(Home.this, "Comiendo!", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.inservice:
-                //opStateTxtV.setText("En servicio");
-                mImage.setImageResource(R.drawable.tow_truck);
-                Toast.makeText(Home.this, "En servicio!", Toast.LENGTH_SHORT).show();
-                return true;
-        }
-        return true;
+    //Metodo para menu desplegable para seleccion de estado
+    public void showPopUpState(View v) {
+        popupMenu(v,R.menu.popup_menu_state);
+    }
+    //Metodo para menu desplegable para seleccion de compañia
+    public void showPopUpCompany(View v) {
+        popupMenu(v,R.menu.popup_menu_company);
+    }
+    //Metodo para menu desplegable para seleccion de compañia
+    public void showPopUpRealizedContact(View v) {
+        popupMenu(v,R.menu.popup_menu_realized_contact);
     }
 
+    //Verifica estado seleccionado
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        opStateTxtV = findViewById(R.id.text_opState);
+        mImage = findViewById(R.id.imageState);
+
+        Map<String, String> userinfo = new HashMap<>();
+
+        switch (item.getItemId()){
+            case R.id.item_available:
+                opStateTxtV.setText("Disponible");
+                mImage.setImageResource(R.drawable.checkmark);
+                state = opStateTxtV.getText().toString();
+                mFirestore.collection("Users").document(mFirebaseAuth.getCurrentUser().getUid()).update("State",state);
+                return true;
+            case R.id.item_eating:
+                opStateTxtV.setText("Comiendo");
+                mImage.setImageResource(R.drawable.fast_food);
+                state = opStateTxtV.getText().toString();
+                mFirestore.collection("Users").document(mFirebaseAuth.getCurrentUser().getUid()).update("State",state);
+                return true;
+            case R.id.item_onservice:
+                opStateTxtV.setText("En servicio");
+                mImage.setImageResource(R.drawable.tow_truck);
+                state = opStateTxtV.getText().toString();
+                mFirestore.collection("Users").document(mFirebaseAuth.getCurrentUser().getUid()).update("State",state);
+                return true;
+            case R.id.item_Atlas:
+                Toast.makeText(this, "Atlas", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item_ABBA:
+                Toast.makeText(this, "ABBA", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item_Qualitas:
+                Toast.makeText(this, "Qualitas", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item_GeneralSeguros:
+                Toast.makeText(this, "General Seguros", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item_Yes:
+                Toast.makeText(this, "Si", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item_No:
+                Toast.makeText(this, "No", Toast.LENGTH_SHORT).show();
+                return true;
+            default: return false;
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

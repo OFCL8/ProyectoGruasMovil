@@ -1,6 +1,25 @@
 <resources>
+    <!--Menu-->
     <string name="app_name">GruasAppMoviles</string>
     <string name="title_activity_home">Home</string>
+    <string name="title_state">Seleccionar estado</string>
+    <string name="title_company">Seleccionar compañía</string>
+    <string name="title_realized_contact">Contacto Realizado</string>
+
+    <!--Popup Menu State-->
+    <string name="available">Disponible</string>
+    <string name="eating">Comiendo</string>
+    <string name="onservice">En servicio</string>
+
+    <!--Popup Menu Company-->
+    <string name="Atlas">Atlas</string>
+    <string name="ABBA">ABBA</string>
+    <string name="Qualitas">Qualitas</string>
+    <string name="GeneralSeguros">General Seguros</string>
+
+    <!--Popup Menu Realized Contact-->
+    <string name="Yes">Si</string>
+    <string name="No">No</string>
 
     <string name="title_forms">Bitácoras</string>
     <string name="title_logout">Salir</string>
@@ -16,8 +35,26 @@
     <string name="menu_info">Acerca de</string>
 
     <string name="btn_opState">Seleccionar estado</string>
-    <string name="option_available">Disponible</string>
-    <string name="option_eating">Comiendo</string>
-    <string name="option_inservice">En servicio</string>
+    
+    <string name="info_textview">
+        <br>
+        Integrantes:\n\n</br>
+        <br>
+        Beltrán Hernández Jesus Alejandro\n</br>
+        <br>
+        Carrillo López Oliver Fernando\n</br>
+        <br>
+        León Limón Ricardo\n</br>
+        <br>
+        Mondragón Uriarte Victor Manuel\n\n</br>
 
+        <br>
+        Instituto Tecnológico de Tijuana\n</br>
+        <br>
+        Semestre: 9no\n</br>
+        <br>
+        Carrera: Ing. Sistemas Computacionales\n\n</br>
+        <br>
+        Profesor: Dr. Carlos Hurtado Sánchez\n</br>
+    </string>
 </resources>

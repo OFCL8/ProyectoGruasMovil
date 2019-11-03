@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/item_Atlas"
+        android:title="@string/Atlas" />
+    <item android:id="@+id/item_ABBA"
+        android:title="@string/ABBA" />
+    <item android:id="@+id/item_Qualitas"
+        android:title="@string/Qualitas" />
+    <item android:id="@+id/item_GeneralSeguros"
+        android:title="@string/GeneralSeguros" />
+</menu>

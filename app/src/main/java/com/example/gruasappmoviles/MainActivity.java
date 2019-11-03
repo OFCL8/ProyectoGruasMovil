@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         SignInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = emailId.getText().toString();
+                final String email = emailId.getText().toString();
                 String psw = password.getText().toString();
                 //Revisar campos estan vacios
                 if (email.isEmpty()) {

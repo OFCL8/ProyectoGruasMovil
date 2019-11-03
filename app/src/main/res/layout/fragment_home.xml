@@ -32,6 +32,7 @@
 
     <ImageView
         android:id="@+id/imageState"
+        android:contentDescription="StateImage"
         android:layout_width="182dp"
         android:layout_height="144dp"
         android:layout_marginTop="36dp"
@@ -41,12 +42,12 @@
         app:layout_constraintTop_toBottomOf="@+id/text_opname" />
 
     <Button
-        android:id="@+id/btn_opState"
-        android:onClick="showPopUp"
+        android:id="@+id/state_button"
         android:layout_width="212dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="64dp"
         android:background="@drawable/button_background"
+        android:onClick="showPopUpState"
         android:text="@string/btn_opState"
         android:textColor="@color/common_google_signin_btn_text_dark_pressed"
         android:textSize="18sp"
@@ -60,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_opState"
+        app:layout_constraintBottom_toTopOf="@+id/state_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageState" />
