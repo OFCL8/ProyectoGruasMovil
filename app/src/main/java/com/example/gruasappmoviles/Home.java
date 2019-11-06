@@ -46,6 +46,15 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
     String state;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        //Obtiene email de operador al iniciar sesión
+        opEmail = mFirebaseAuth.getCurrentUser().getEmail();
+        opName = findViewById(R.id.text_opname);
+        opName.setText(opEmail);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -56,8 +65,8 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intToCreate = new Intent(Home.this, CreateFormActivity.class);
+                startActivity(intToCreate);
             }
         });
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);

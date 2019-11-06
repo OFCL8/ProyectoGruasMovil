@@ -32,10 +32,11 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_dashboard">Bitácoras</string>
+    <string name="menu_form">Crear Bitácora</string>
     <string name="menu_info">Acerca de</string>
 
     <string name="btn_opState">Seleccionar estado</string>
-    
+
     <string name="info_textview">
         <br>
         Integrantes:\n\n</br>

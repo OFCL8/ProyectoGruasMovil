@@ -1,4 +1,4 @@
-package com.example.gruasappmoviles.info;
+package com.example.gruasappmoviles.ui.info;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if (psw.isEmpty()) {
                     password.setError("Introduzca una contraseña");
+                    password.requestFocus();
                 }
                 else if (email.isEmpty() && psw.isEmpty()){
                     Toast.makeText(MainActivity.this, "Hay campos vacíos!!", Toast.LENGTH_SHORT).show();

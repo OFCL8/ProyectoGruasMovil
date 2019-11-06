@@ -1,4 +1,4 @@
-package com.example.gruasappmoviles.info;
+package com.example.gruasappmoviles.ui.info;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
