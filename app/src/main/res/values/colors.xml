@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorToolbar">#964000</color>
     <color name="ADD">#233F4A</color>
+    <color name="hintForm">#7B7A7A</color>
+    <color name="saveform">#F99A19</color>
 </resources>

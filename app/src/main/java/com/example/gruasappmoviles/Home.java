@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,7 +16,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -25,14 +27,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
 
@@ -41,17 +39,35 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
 
     TextView opStateTxtV, opName;
     ImageView mImage;
-    String opEmail;
+    String opEmail, opState;
     private FirebaseFirestore mFirestore;
     String state;
+
+    private void getUserEmailAndState() {
+        mFirestore.collection("Users").document(mFirebaseAuth.getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                //Obtiene email de operador al iniciar sesión
+                opEmail = documentSnapshot.getString("Email");
+                opState = documentSnapshot.getString("State");
+                opName = findViewById(R.id.text_opname);
+                opStateTxtV = findViewById(R.id.text_opState);
+                opName.setText(opEmail);
+                opStateTxtV.setText(opState);
+            }
+        });
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        //Obtiene email de operador al iniciar sesión
-        opEmail = mFirebaseAuth.getCurrentUser().getEmail();
-        opName = findViewById(R.id.text_opname);
-        opName.setText(opEmail);
+        getUserEmailAndState();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getUserEmailAndState();
     }
 
     @Override
@@ -61,7 +77,8 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        //Botón para abrir pantalla de crear bitácora
+        FloatingActionButton fab = findViewById(R.id.saveform);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,22 +112,13 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
     public void showPopUpState(View v) {
         popupMenu(v,R.menu.popup_menu_state);
     }
-    //Metodo para menu desplegable para seleccion de compañia
-    public void showPopUpCompany(View v) {
-        popupMenu(v,R.menu.popup_menu_company);
-    }
-    //Metodo para menu desplegable para seleccion de compañia
-    public void showPopUpRealizedContact(View v) {
-        popupMenu(v,R.menu.popup_menu_realized_contact);
-    }
+
 
     //Verifica estado seleccionado
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         opStateTxtV = findViewById(R.id.text_opState);
         mImage = findViewById(R.id.imageState);
-
-        Map<String, String> userinfo = new HashMap<>();
 
         switch (item.getItemId()){
             case R.id.item_available:

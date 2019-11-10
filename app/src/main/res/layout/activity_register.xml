@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/regtelephone_editText"
+        android:id="@+id/año_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regpassword2_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/tipo_editText" />
 
     <EditText
         android:id="@+id/regemail_editText"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/regpassword_editText"
+        android:id="@+id/marca_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/regemail_editText" />
 
     <EditText
-        android:id="@+id/regpassword2_editText"
+        android:id="@+id/tipo_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regpassword_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/marca_editText" />
 
     <Button
         android:id="@+id/register_button"
@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regtelephone_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/año_editText" />
 
     <TextView
         android:id="@+id/signin_textview"

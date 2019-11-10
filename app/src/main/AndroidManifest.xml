@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".CreateFormActivity"
+            android:label="@string/createform_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Home"

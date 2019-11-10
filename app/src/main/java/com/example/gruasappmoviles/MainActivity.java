@@ -48,8 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
                 if( mFirebaseUser != null ) {
                     Toast.makeText(MainActivity.this, "Bienvenido!", Toast.LENGTH_SHORT);
-                    Intent i = new Intent(MainActivity.this, Home.class);
-                    startActivity(i);
+                    startActivity(new Intent(MainActivity.this, Home.class));
                 }
                 else {
                     Toast.makeText(MainActivity.this, "Por favor inicie sesión", Toast.LENGTH_SHORT);
@@ -81,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "No pudo iniciar sesión!", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                Intent intToHome = new Intent(MainActivity.this, Home.class);
-                                startActivity(intToHome);
+                                startActivity(new Intent(MainActivity.this, Home.class));
                             }
                         }
                     });
@@ -96,8 +94,7 @@ public class MainActivity extends AppCompatActivity {
         SignUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intSignUp = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(intSignUp);
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
             }
         });
     }

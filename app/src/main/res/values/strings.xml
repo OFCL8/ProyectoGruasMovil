@@ -1,6 +1,7 @@
 <resources>
     <!--Menu-->
     <string name="app_name">GruasAppMoviles</string>
+    <string name="createform_name">Crear Bitácoras</string>
     <string name="title_activity_home">Home</string>
     <string name="title_state">Seleccionar estado</string>
     <string name="title_company">Seleccionar compañía</string>
@@ -36,6 +37,8 @@
     <string name="menu_info">Acerca de</string>
 
     <string name="btn_opState">Seleccionar estado</string>
+    <string name="btn_contact">Contacto Realizado</string>
+    <string name="btn_company">Seleccione Compañía</string>
 
     <string name="info_textview">
         <br>
