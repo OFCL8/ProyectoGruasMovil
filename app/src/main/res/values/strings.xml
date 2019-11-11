@@ -42,7 +42,7 @@
 
     <string name="Company">Compañía: </string>
     <string name="Plates">Placas: </string>
-    <string name="FormID">ID Bitácora: </string>
+    <string name="Type">Tipo: </string>
 
     <string name="info_textview">
         <br>

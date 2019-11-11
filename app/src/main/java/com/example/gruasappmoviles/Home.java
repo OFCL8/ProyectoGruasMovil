@@ -39,14 +39,13 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
 
     private AppBarConfiguration mAppBarConfiguration;
     FirebaseAuth mFirebaseAuth;
-
+    String opEmail, opState;
     TextView opStateTxtV, opName;
     ImageView mImage;
-    String opEmail, opState;
     private FirebaseFirestore mFirestore;
     String state;
 
-    private void getUserEmailAndState() {
+    public void getUserEmailAndState() {
         mFirestore = FirebaseFirestore.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirestore.collection("Users").document(mFirebaseAuth.getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -101,7 +100,6 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        getUserEmailAndState();
     }
 
     //Comportamiento Popup Menu

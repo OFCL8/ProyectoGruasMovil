@@ -32,8 +32,8 @@
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ID"
-        android:text="@string/FormID"
+        android:id="@+id/Type"
+        android:text="@string/Type"
         android:textSize="18sp"
         android:textColor="#000"
         android:layout_toRightOf="@id/historyPic"
@@ -44,13 +44,13 @@
         android:layout_below="@id/Date"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/FormsID"
+            android:id="@+id/FormsType"
             android:textSize="18sp"
             android:textColor="#a9a9a9"
-            android:layout_toRightOf="@id/ID"
-            android:layout_toEndOf="@id/ID"
+            android:layout_toRightOf="@id/Type"
+            android:layout_toEndOf="@id/Type"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
@@ -67,11 +67,11 @@
             android:layout_toEndOf="@id/historyPic"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_below="@id/ID"/>
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/Type"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/Company_name"
             android:textSize="18sp"
@@ -80,8 +80,8 @@
             android:layout_toEndOf="@id/Company"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_below="@id/ID"/>
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/Type"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
             android:layout_below="@id/Company"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/Plates_data"
             android:textSize="18sp"

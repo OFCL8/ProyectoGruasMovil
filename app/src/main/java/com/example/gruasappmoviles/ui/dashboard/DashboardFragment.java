@@ -37,6 +37,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.internal.bind.ReflectiveTypeAdapterFactory;
 
+import java.lang.reflect.Type;
 import java.text.Normalizer;
 import java.util.ArrayList;
 
@@ -81,13 +82,13 @@ public class DashboardFragment extends Fragment {
                     //Ciclo para asignar los campos de bitácora al recyclerview
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Forms f = new Forms();
-                        String Date, ID, Plates, Company;
+                        String Date, Type, Plates, Company;
                         Date = document.get("Fecha").toString();
                         Plates = document.get("Placas").toString();
+                        Type = document.get("Tipo").toString();
                         Company = document.get("Compañía").toString();
-                        ID = document.getId();
                         f.setDate(Date);
-                        f.setFormID(ID);
+                        f.setType(Type);
                         f.setPlates(Plates);
                         f.setCompany(Company);
                         forms.add(f);

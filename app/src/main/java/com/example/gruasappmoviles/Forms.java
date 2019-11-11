@@ -3,14 +3,14 @@ package com.example.gruasappmoviles;
 import java.util.ArrayList;
 
 public class Forms extends ArrayList<Forms> {
-    private String Date, FormID, Plates, Company;
+    private String Date, Plates, Company, Type;
 
     public Forms() {
     }
 
-    public Forms(String date, String formID, String plates, String company) {
+    public Forms(String date, String type, String plates, String company) {
         Date = date;
-        FormID = formID;
+        Type = type;
         Plates = plates;
         Company = company;
     }
@@ -23,14 +23,10 @@ public class Forms extends ArrayList<Forms> {
         Date = date;
     }
 
-    public String getFormID() {
-        return FormID;
-    }
+    public String getType() { return Type; }
 
-    public void setFormID(String formID) {
-        FormID = formID;
-    }
-
+    public void setType(String type) { Type = type; }
+    
     public String getPlates() { return Plates; }
 
     public void setPlates(String plates) { Plates = plates; }
