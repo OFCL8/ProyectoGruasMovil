@@ -25,6 +25,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.widget.ImageView;
@@ -139,24 +140,6 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
                 state = opStateTxtV.getText().toString();
                 mFirestore.collection("Users").document(mFirebaseAuth.getCurrentUser().getUid()).update("State",state);
                 return true;
-            case R.id.item_Atlas:
-                Toast.makeText(this, "Atlas", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item_ABBA:
-                Toast.makeText(this, "ABBA", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item_Qualitas:
-                Toast.makeText(this, "Qualitas", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item_GeneralSeguros:
-                Toast.makeText(this, "General Seguros", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item_Yes:
-                Toast.makeText(this, "Si", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item_No:
-                Toast.makeText(this, "No", Toast.LENGTH_SHORT).show();
-                return true;
             default: return false;
         }
     }
@@ -172,8 +155,7 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
             case R.id.action_settings:
                 FirebaseAuth.getInstance().signOut();
                 finish();
-                Intent intLogOut = new Intent(Home.this, MainActivity.class);
-                startActivity(intLogOut);
+                startActivity(new Intent(Home.this, MainActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -16,13 +16,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.Normalizer;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class CreateFormActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
@@ -65,6 +74,10 @@ public class CreateFormActivity extends AppCompatActivity implements PopupMenu.O
                         || compañia.equals("") || contacto.equals(""))){
 
                     Map<String, String> formsinfo = new HashMap<>();
+                    //Obteniendo fecha y dando formato sencillo
+                    Date c = Calendar.getInstance().getTime();
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+                    String formattedDate = df.format(c);
                     //Agregando información de la bitácora
                     formsinfo.put("Marca",marca);
                     formsinfo.put("Tipo",tipo);
@@ -74,6 +87,7 @@ public class CreateFormActivity extends AppCompatActivity implements PopupMenu.O
                     formsinfo.put("Serie",serie);
                     formsinfo.put("Compañía",compañia);
                     formsinfo.put("Contacto Realizado",contacto);
+                    formsinfo.put("Fecha",formattedDate);
 
                     mFirestore.collection("Bitacoras").document("Operadores").collection(userUID)
                             .document(UUID.randomUUID().toString()).set(formsinfo).addOnCompleteListener(CreateFormActivity.this, new OnCompleteListener<Void>() {

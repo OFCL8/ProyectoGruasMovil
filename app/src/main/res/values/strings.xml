@@ -40,6 +40,9 @@
     <string name="btn_contact">Contacto Realizado</string>
     <string name="btn_company">Seleccione Compañía</string>
 
+    <string name="Date">Fecha: </string>
+    <string name="FormID">ID Bitácora: </string>
+
     <string name="info_textview">
         <br>
         Integrantes:\n\n</br>
