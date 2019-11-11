@@ -8,7 +8,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -45,6 +47,8 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
     String state;
 
     private void getUserEmailAndState() {
+        mFirestore = FirebaseFirestore.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
         mFirestore.collection("Users").document(mFirebaseAuth.getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
@@ -83,8 +87,7 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intToCreate = new Intent(Home.this, CreateFormActivity.class);
-                startActivity(intToCreate);
+                startActivity(new Intent(Home.this, CreateFormActivity.class));
             }
         });
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -98,8 +101,7 @@ public class Home extends AppCompatActivity implements PopupMenu.OnMenuItemClick
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        mFirestore = FirebaseFirestore.getInstance();
-        mFirebaseAuth = FirebaseAuth.getInstance();
+        getUserEmailAndState();
     }
 
     //Comportamiento Popup Menu

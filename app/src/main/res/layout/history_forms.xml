@@ -30,17 +30,85 @@
             android:layout_marginStart="10dp"/>
 
         <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ID"
+        android:text="@string/FormID"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_toRightOf="@id/historyPic"
+        android:layout_toEndOf="@id/historyPic"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/Date"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/FormsID"
             android:textSize="18sp"
             android:textColor="#a9a9a9"
+            android:layout_toRightOf="@id/ID"
+            android:layout_toEndOf="@id/ID"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/Date"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Company"
+            android:text="@string/Company"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:layout_toRightOf="@id/historyPic"
+            android:layout_toEndOf="@id/historyPic"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/ID"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Company_name"
+            android:textSize="18sp"
+            android:textColor="#a9a9a9"
+            android:layout_toRightOf="@id/Company"
+            android:layout_toEndOf="@id/Company"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/ID"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Plates"
+            android:text="@string/Plates"
+            android:textSize="18sp"
+            android:textColor="#000"
             android:layout_toRightOf="@id/historyPic"
             android:layout_toEndOf="@id/historyPic"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:layout_below="@id/Date"/>
+            android:layout_below="@id/Company"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Plates_data"
+            android:textSize="18sp"
+            android:textColor="#a9a9a9"
+            android:layout_toRightOf="@id/Plates"
+            android:layout_toEndOf="@id/Plates"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/Company"/>
 
     </RelativeLayout>
 

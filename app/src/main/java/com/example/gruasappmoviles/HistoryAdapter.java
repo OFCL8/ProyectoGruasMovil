@@ -35,6 +35,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<Holder> {
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         holder.mDate.setText(Forms.get(position).getDate());
         holder.mFormsID.setText(Forms.get(position).getFormID());
+        holder.mPlates.setText(Forms.get(position).getPlates());
+        holder.mCompany.setText(Forms.get(position).getCompany());
     }
 
     @Override
