@@ -91,6 +91,7 @@ public class DashboardFragment extends Fragment {
                         f.setType(Type);
                         f.setPlates(Plates);
                         f.setCompany(Company);
+                        f.setImage(R.drawable.forms_history);
                         forms.add(f);
                     }
                     //Asigna todos los valores en el adapter y llena recyclerview

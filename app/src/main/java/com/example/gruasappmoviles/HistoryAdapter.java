@@ -2,6 +2,9 @@ package com.example.gruasappmoviles;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -32,11 +37,34 @@ public class HistoryAdapter extends RecyclerView.Adapter<Holder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Holder holder, int position) {
+    public void onBindViewHolder(@NonNull final Holder holder, int position) {
         holder.mDate.setText(Forms.get(position).getDate());
         holder.mType.setText(Forms.get(position).getType());
         holder.mPlates.setText(Forms.get(position).getPlates());
         holder.mCompany.setText(Forms.get(position).getCompany());
+        holder.mImageView.setImageResource(Forms.get(position).getImage());
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemClickListener(View v, int position) {
+                String DetailsTitle = Forms.get(position).getDate();
+                BitmapDrawable bitmapDrawable = (BitmapDrawable)holder.mImageView.getDrawable();
+
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();//Image will get stream and bytes
+
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream); //it will compress our image
+
+                byte[] bytes = stream.toByteArray();
+
+                //get our data with intent
+                Intent intent = new Intent(context, DetailsActivity.class);
+                intent.putExtra("Date", DetailsTitle);
+                intent.putExtra("Image",bytes);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Forms extends ArrayList<Forms> {
     private String Date, Plates, Company, Type;
 
+    private int image;
+
     public Forms() {
     }
 
@@ -34,4 +36,8 @@ public class Forms extends ArrayList<Forms> {
     public String getCompany() { return Company; }
 
     public void setCompany(String company) { Company = company; }
+
+    public int getImage() { return image; }
+
+    public void setImage(int image) { this.image = image; }
 }

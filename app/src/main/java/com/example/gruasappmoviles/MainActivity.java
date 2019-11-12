@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TextView SignUpTextView;
     FirebaseAuth mFirebaseAuth;
     FirebaseAuth.AuthStateListener mAuthStateListener;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.signinpassword_editText);
         SignUpTextView = findViewById(R.id.signup_textview);
         SignInBtn = findViewById(R.id.signin_button);
+        spinner = findViewById(R.id.progressBar1);
+        spinner.setVisibility(View.GONE);
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -73,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Hay campos vacíos!!", Toast.LENGTH_SHORT).show();
                 }
                 else if (!(email.isEmpty() && psw.isEmpty())) {
+                    spinner.setVisibility(View.VISIBLE);
                     mFirebaseAuth.signInWithEmailAndPassword(email,psw).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -81,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             else {
                                 startActivity(new Intent(MainActivity.this, Home.class));
+                                spinner.setVisibility(View.GONE);
                             }
                         }
                     });
