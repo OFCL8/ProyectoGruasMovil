@@ -84,6 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 userinfo.put("Email",email);
                                 userinfo.put("Password",psw);
                                 userinfo.put("Phone",telephone);
+                                userinfo.put("State","Disponible");
                                 mFirestore.collection("Users").document(mFirebaseAuth.getCurrentUser().getUid()).set(userinfo);
                                 startActivity(new Intent(RegisterActivity.this, Home.class));
                             }
