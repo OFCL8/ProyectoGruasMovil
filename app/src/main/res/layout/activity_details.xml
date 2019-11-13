@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#fff"
+    tools:context=".DetailsActivity">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/DetailsPic"
+        android:src="@drawable/forms_history"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/DetailsDate"
+        android:textSize="22sp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:layout_below="@id/DetailsPic"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"/>
+
+
+    <TextView
+        android:id="@+id/Companydetails"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/DetailsDate"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/Modeldetails"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Companydetails"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center" />
+
+
+    <TextView
+        android:id="@+id/Typedetails"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Modeldetails"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/Yeardetails"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Typedetails"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/Platesdetails"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Yeardetails"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/Colordetails"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Platesdetails"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center" />
+
+
+    <TextView
+        android:id="@+id/Seriesdetails"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Colordetails"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/Contactdetails"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Seriesdetails"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/Emaildetails"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Contactdetails"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/IDForms"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Emaildetails"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center" />
+
+
+</RelativeLayout>

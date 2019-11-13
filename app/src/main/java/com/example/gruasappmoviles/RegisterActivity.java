@@ -42,9 +42,9 @@ public class RegisterActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
         //Inflando widgets
         emailId = findViewById(R.id.regemail_editText);
-        password = findViewById(R.id.regpassword_editText);
-        confpass = findViewById(R.id.regpassword2_editText);
-        tel = findViewById(R.id.regtelephone_editText);
+        password = findViewById(R.id.marca_editText);
+        confpass = findViewById(R.id.tipo_editText);
+        tel = findViewById(R.id.año_editText);
         SignInTextView = findViewById(R.id.signin_textview);
         SignUpBtn = findViewById(R.id.register_button);
         //Metodo click
@@ -84,9 +84,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 userinfo.put("Email",email);
                                 userinfo.put("Password",psw);
                                 userinfo.put("Phone",telephone);
+                                userinfo.put("State","Disponible");
                                 mFirestore.collection("Users").document(mFirebaseAuth.getCurrentUser().getUid()).set(userinfo);
-                                Intent intToHome = new Intent(RegisterActivity.this, Home.class);
-                                startActivity(intToHome);
+                                startActivity(new Intent(RegisterActivity.this, Home.class));
                             }
                         }
                     });
@@ -102,8 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
         SignInTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(RegisterActivity.this, MainActivity.class);
-                startActivity(i);
+                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
             }
         });
     }
