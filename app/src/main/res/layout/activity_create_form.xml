@@ -158,8 +158,8 @@
         app:srcCompat="@drawable/saveform" />
 
     <include
-        android:id="@+id/my_toolbar"
-        layout="@layout/toolbar" />
+    android:id="@+id/my_toolbar"
+    layout="@layout/toolbar" />
 
     <TextView
         android:id="@+id/instruction"

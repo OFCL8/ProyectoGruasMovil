@@ -41,8 +41,8 @@
     <string name="btn_company">Seleccione Compañía</string>
 
     <string name="Company">Compañía: </string>
+    <string name="IDForms">ID Bitácora: </string>
     <string name="Plates">Placas: </string>
-    <string name="Type">Tipo: </string>
 
     <string name="info_textview">
         <br>

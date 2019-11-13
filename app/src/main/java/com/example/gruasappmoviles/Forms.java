@@ -3,16 +3,16 @@ package com.example.gruasappmoviles;
 import java.util.ArrayList;
 
 public class Forms extends ArrayList<Forms> {
-    private String Date, Plates, Company, Type;
+    private String ID, Date, Plates, Company;
 
     private int image;
 
     public Forms() {
     }
 
-    public Forms(String date, String type, String plates, String company) {
+    public Forms(String id, String date, String plates, String company) {
+        ID = id;
         Date = date;
-        Type = type;
         Plates = plates;
         Company = company;
     }
@@ -25,10 +25,6 @@ public class Forms extends ArrayList<Forms> {
         Date = date;
     }
 
-    public String getType() { return Type; }
-
-    public void setType(String type) { Type = type; }
-    
     public String getPlates() { return Plates; }
 
     public void setPlates(String plates) { Plates = plates; }
@@ -40,4 +36,9 @@ public class Forms extends ArrayList<Forms> {
     public int getImage() { return image; }
 
     public void setImage(int image) { this.image = image; }
+
+    public String getID() { return ID; }
+
+    public void setID(String ID) { this.ID = ID; }
+
 }

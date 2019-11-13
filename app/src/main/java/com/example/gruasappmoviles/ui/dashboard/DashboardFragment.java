@@ -82,13 +82,13 @@ public class DashboardFragment extends Fragment {
                     //Ciclo para asignar los campos de bitácora al recyclerview
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Forms f = new Forms();
-                        String Date, Type, Plates, Company;
+                        String ID, Date, Plates, Company;
                         Date = document.get("Fecha").toString();
                         Plates = document.get("Placas").toString();
-                        Type = document.get("Tipo").toString();
                         Company = document.get("Compañía").toString();
+                        ID = document.getId();
+                        f.setID(ID);
                         f.setDate(Date);
-                        f.setType(Type);
                         f.setPlates(Plates);
                         f.setCompany(Company);
                         f.setImage(R.drawable.forms_history);
@@ -106,9 +106,4 @@ public class DashboardFragment extends Fragment {
 
         return forms;
     }
-
-    public void inicializaAdaptador() {
-
-    }
-
 }

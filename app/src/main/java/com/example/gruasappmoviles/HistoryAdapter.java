@@ -39,15 +39,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<Holder> {
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, int position) {
         holder.mDate.setText(Forms.get(position).getDate());
-        holder.mType.setText(Forms.get(position).getType());
         holder.mPlates.setText(Forms.get(position).getPlates());
         holder.mCompany.setText(Forms.get(position).getCompany());
+        holder.mID.setText(Forms.get(position).getID());
         holder.mImageView.setImageResource(Forms.get(position).getImage());
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClickListener(View v, int position) {
                 String DetailsTitle = Forms.get(position).getDate();
+                String IDForms = Forms.get(position).getID();
                 BitmapDrawable bitmapDrawable = (BitmapDrawable)holder.mImageView.getDrawable();
 
                 Bitmap bitmap = bitmapDrawable.getBitmap();
@@ -62,6 +63,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<Holder> {
                 Intent intent = new Intent(context, DetailsActivity.class);
                 intent.putExtra("Date", DetailsTitle);
                 intent.putExtra("Image",bytes);
+                intent.putExtra("ID", IDForms);
                 context.startActivity(intent);
             }
         });
