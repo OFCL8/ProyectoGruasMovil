@@ -3,73 +3,41 @@ package com.example.gruasappmoviles;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.drm.DrmStore;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.pdf.PdfDocument;
-import android.icu.text.IDNA;
 import android.icu.text.SimpleDateFormat;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.print.pdf.PrintedPdfDocument;
-import android.provider.DocumentsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.gruasappmoviles.ui.dashboard.DashboardFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Date;
 import java.util.Locale;
 
-import com.itextpdf.text.Anchor;
-import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.List;
-import com.itextpdf.text.ListItem;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Section;
-import com.itextpdf.text.pdf.PdfImportedPage;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import static com.itextpdf.text.Font.FontStyle.BOLD;
 
 public class DetailsActivity extends AppCompatActivity {
     TextView mDate, mComp, mModel, mType, mYear, mPlates, mColor, mSeries, mContact, mEmail, opName, mIDForm;
@@ -191,7 +159,7 @@ public class DetailsActivity extends AppCompatActivity {
                             mPlates.setText("Placas: "+Plates);
                             mColor.setText("Color: "+ColorF);
                             mSeries.setText("Serie: "+Series);
-                            mContact.setText("Contacto Reliazado: "+Contact);
+                            mContact.setText("Contacto Realizado: "+Contact);
                 }
             }
         });
@@ -204,21 +172,33 @@ public class DetailsActivity extends AppCompatActivity {
         String mFileName = new SimpleDateFormat("yyyyMMdd_HHmmss",
                 Locale.getDefault()).format(System.currentTimeMillis());
         //pdf file path
-        String mFilePath = Environment.getExternalStorageDirectory()+ "/" + mFileName + ".pdf";
+        String mFilePath = "/sdcard/Download/" + mFileName + ".pdf";
 
         try {
             //create instance of PdfWriter class
             PdfWriter.getInstance(mDoc, new FileOutputStream(mFilePath));
             //open the document for writing
             mDoc.open();
-            //get text from EditText i.e. mTextEt
-            String mText = mIDForm.getText().toString();
 
-            //add author of the document (optional)
-            mDoc.addAuthor("Atif Pervaiz");
-
+            // Creating Chunk
+            Chunk mOrderDetailsTitleChunk = new Chunk("GRÚAS Y RESGUARDO INSURGENTES");
+            // Creating Paragraph to add...
+            Paragraph mOrderDetailsTitleParagraph = new Paragraph(mOrderDetailsTitleChunk);
+            // Setting Alignment for Heading
+            mOrderDetailsTitleParagraph.setAlignment(Element.ALIGN_CENTER);
+            mDoc.add(mOrderDetailsTitleParagraph);
             //add paragraph to the document
-            mDoc.add(new Paragraph(mText));
+            mDoc.add(new Paragraph(mDate.getText().toString()));
+            mDoc.add(new Paragraph(mComp.getText().toString()));
+            mDoc.add(new Paragraph(mModel.getText().toString()));
+            mDoc.add(new Paragraph(mType.getText().toString()));
+            mDoc.add(new Paragraph(mYear.getText().toString()));
+            mDoc.add(new Paragraph(mPlates.getText().toString()));
+            mDoc.add(new Paragraph(mColor.getText().toString()));
+            mDoc.add(new Paragraph(mSeries.getText().toString()));
+            mDoc.add(new Paragraph(mContact.getText().toString()));
+            mDoc.add(new Paragraph(mEmail.getText().toString()));
+            mDoc.add(new Paragraph(mIDForm.getText().toString()));
 
             //close the document
             mDoc.close();
