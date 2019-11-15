@@ -3,6 +3,7 @@ package com.example.gruasappmoviles;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -41,6 +42,7 @@ public class CreateFormActivity extends AppCompatActivity implements PopupMenu.O
     String contacto = "";
     FirebaseAuth mFirebaseAuth;
     private FirebaseFirestore mFirestore;
+    ProgressDialog dialog;
 
     @Override
     public void onBackPressed() {
@@ -61,6 +63,8 @@ public class CreateFormActivity extends AppCompatActivity implements PopupMenu.O
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog = ProgressDialog.show(CreateFormActivity.this, "Cargando", "Por favor, espere...", true);
+
                 final String marca = marcatxt.getText().toString();
                 final String tipo = tipotxt.getText().toString();
                 final String año = añotxt.getText().toString();
@@ -94,16 +98,20 @@ public class CreateFormActivity extends AppCompatActivity implements PopupMenu.O
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(!task.isSuccessful()){
+                                dialog.dismiss();
                                 Toast.makeText(CreateFormActivity.this, "Intente de nuevo!", Toast.LENGTH_SHORT).show();
                             }
                             else {
                                 startActivity(new Intent(CreateFormActivity.this, Home.class));
+                                dialog.dismiss();
                             }
                         }
                     });
                 }
                 else {
+
                     Toast.makeText(CreateFormActivity.this, "Favor de llenar todos los campos!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                 }
             }
         });

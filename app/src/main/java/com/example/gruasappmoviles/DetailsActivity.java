@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -44,6 +45,7 @@ public class DetailsActivity extends AppCompatActivity {
     String mTitle, opEmail, IDForm;
     String Company, Model, Type, Plates, ColorF, Series, Contact, Year;
     ImageView mImageView;
+    ProgressDialog dialog;
 
     FirebaseAuth mFirebaseAuth;
     private FirebaseFirestore mFirestore;
@@ -56,6 +58,8 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         ActionBar actionBar = getSupportActionBar();
+        dialog = ProgressDialog.show(DetailsActivity.this, "Cargando", "Por favor, espere...", true);
+
         //Permisos para PDF
         ActivityCompat.requestPermissions(DetailsActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
@@ -88,6 +92,7 @@ public class DetailsActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
         getUserEmail();
         getFormsData();
+        dialog.dismiss();
 
         //Botón para PDF con información de bitácora
         FloatingActionButton fab = findViewById(R.id.topdf);

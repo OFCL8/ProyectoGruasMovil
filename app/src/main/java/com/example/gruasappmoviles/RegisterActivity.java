@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextView SignInTextView;
     FirebaseAuth mFirebaseAuth;
     private FirebaseFirestore mFirestore;
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,9 @@ public class RegisterActivity extends AppCompatActivity {
         tel = findViewById(R.id.año_editText);
         SignInTextView = findViewById(R.id.signin_textview);
         SignUpBtn = findViewById(R.id.register_button);
+        spinner = findViewById(R.id.progressBar2);
+        spinner.setVisibility(View.GONE);
+
         //Metodo click
         SignUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Hay campos vacíos!", Toast.LENGTH_SHORT).show();
                 }
                 else if (!(email.isEmpty() && psw.isEmpty() && psw2.isEmpty() && telephone.isEmpty())) {
+                    spinner.setVisibility(View.VISIBLE);
                     mFirebaseAuth.createUserWithEmailAndPassword(email,psw).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -87,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 userinfo.put("State","Disponible");
                                 mFirestore.collection("Users").document(mFirebaseAuth.getCurrentUser().getUid()).set(userinfo);
                                 startActivity(new Intent(RegisterActivity.this, Home.class));
+                                spinner.setVisibility(View.GONE);
                             }
                         }
                     });
@@ -94,6 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
                 else
                 {
                     Toast.makeText(RegisterActivity.this, "Ha ocurrido un error!", Toast.LENGTH_SHORT).show();
+                    spinner.setVisibility(View.GONE);
                 }
             }
         });
