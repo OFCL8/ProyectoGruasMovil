@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(MainActivity.this, "Ha ocurrido un error!", Toast.LENGTH_SHORT).show();
+                    spinner.setVisibility(View.GONE);
                 }
             }
         });

@@ -1,5 +1,6 @@
 package com.example.gruasappmoviles.ui.dashboard;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,6 +51,7 @@ public class DashboardFragment extends Fragment {
     ArrayList<Forms> forms;
     FirebaseAuth mFirebaseAuth;
     private FirebaseFirestore mFirestore;
+    ProgressDialog dialog;
 
     @Override
     public void onStart() {
@@ -60,7 +62,7 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
+        dialog = ProgressDialog.show(getActivity(), "Cargando", "Por favor, espere...", true);
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
         mRecyclerView = root.findViewById(R.id.historyRV);
@@ -75,6 +77,7 @@ public class DashboardFragment extends Fragment {
         forms = new ArrayList<>();
         //Accede a las bitácoras generadas por el operador en sesión
         mFirestore.collection("Bitacoras").document("Operadores").collection(mFirebaseAuth.getUid())
+                .orderBy("Fecha", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -97,6 +100,7 @@ public class DashboardFragment extends Fragment {
                     //Asigna todos los valores en el adapter y llena recyclerview
                     mHistoryAdapter = new HistoryAdapter(getContext(), forms);
                     mRecyclerView.setAdapter(mHistoryAdapter);
+                    dialog.dismiss();
                 } else {
                     Toast.makeText(getContext(), "Ha ocurrido un error!", Toast.LENGTH_SHORT).show();
                 }
