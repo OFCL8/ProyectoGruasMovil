@@ -77,6 +77,7 @@ public class DashboardFragment extends Fragment {
         forms = new ArrayList<>();
         //Accede a las bitácoras generadas por el operador en sesión
         mFirestore.collection("Bitacoras").document("Operadores").collection(mFirebaseAuth.getUid())
+                .orderBy("Fecha", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
