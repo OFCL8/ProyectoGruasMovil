@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Usuario"
+        android:hint="Correo"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_pressed"

@@ -1,6 +1,12 @@
 package com.example.gruasappmoviles.ui.dashboard;
 
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +19,14 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 import com.example.gruasappmoviles.CreateFormActivity;
 import com.example.gruasappmoviles.Forms;
@@ -25,6 +34,7 @@ import com.example.gruasappmoviles.HistoryAdapter;
 import com.example.gruasappmoviles.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,6 +61,7 @@ public class DashboardFragment extends Fragment {
     ArrayList<Forms> forms;
     FirebaseAuth mFirebaseAuth;
     private FirebaseFirestore mFirestore;
+    String ID, Date, Plates, Company;
     ProgressDialog dialog;
 
     @Override
@@ -85,7 +96,6 @@ public class DashboardFragment extends Fragment {
                     //Ciclo para asignar los campos de bitácora al recyclerview
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Forms f = new Forms();
-                        String ID, Date, Plates, Company;
                         Date = document.get("Fecha").toString();
                         Plates = document.get("Placas").toString();
                         Company = document.get("Compañía").toString();
@@ -99,15 +109,41 @@ public class DashboardFragment extends Fragment {
                     }
                     //Asigna todos los valores en el adapter y llena recyclerview
                     mHistoryAdapter = new HistoryAdapter(getContext(), forms);
+                    new ItemTouchHelper(itemCallback).attachToRecyclerView(mRecyclerView);
                     mRecyclerView.setAdapter(mHistoryAdapter);
                     dialog.dismiss();
                 } else {
                     Toast.makeText(getContext(), "Ha ocurrido un error!", Toast.LENGTH_SHORT).show();
                 }
             }
-
         });
 
         return forms;
     }
+
+    ItemTouchHelper.SimpleCallback itemCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+
+        @Override
+        public void onChildDraw (Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,float dX, float dY,int actionState, boolean isCurrentlyActive){
+            new RecyclerViewSwipeDecorator.Builder(getActivity(), c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addSwipeRightBackgroundColor(Color.RED)
+                    .addSwipeRightActionIcon(R.drawable.ic_delete_black_24dp)
+                    .create()
+                    .decorate();
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
+            final int position = viewHolder.getAdapterPosition();
+            forms.remove(position);
+            mFirestore.collection("Bitacoras").document("Operadores").collection(mFirebaseAuth.getUid()).document(ID).delete();
+            mHistoryAdapter.notifyItemChanged(position);
+        }
+    };
 }

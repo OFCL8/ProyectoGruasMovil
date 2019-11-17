@@ -15,7 +15,7 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/fields_border"
         android:ems="10"
-        android:hint="Usuario"
+        android:hint="Correo"
         android:inputType="textEmailAddress"
         android:paddingLeft="25dp"
         android:paddingTop="15dp"
